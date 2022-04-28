@@ -139,7 +139,7 @@ Install node.js at the url in the "Built With" section above. Then, using the co
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-Use the following command to run the program from the root of the code directory.
+Use the following command to run the program from the root of the code directory. maybe dont need to do this because its on heroku?
   ```sh
   node server.js
   ```

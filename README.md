@@ -37,3 +37,5 @@ You haven’t learned how to handle DELETE requests, but this application offers
 
 * The URL of the functional, deployed application.
 * The URL of the GitHub repository, with a unique name and a README describing the project.
+
+add store.js to db folder?
