@@ -83,7 +83,15 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 A web application with a backend built in Express.js that maintains notes written and saved by the user. Please reference the the "View Deployed App" link above.
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+Home Page Screen Shot
+
+![Home Page Screen Shot](./Assets/homePage.png)
+
+Notes Page Screen Shot
+
+![Notes Page Screen Shot](./Assets/notesPage.png)
+
 <!-- ![Team Profile Generator GIF](./Assets/TPG_Walkthrough.gif) -->
 
 <!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description` -->

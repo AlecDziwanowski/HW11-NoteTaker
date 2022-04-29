@@ -25,7 +25,7 @@ api.post('/', (request, response) => {
             title,
             text,
             // gives each note a unique id
-            note_id: uuid(),
+            id: uuid(),
         };
 
         // obtain existing notes
