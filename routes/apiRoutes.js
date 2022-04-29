@@ -1,20 +1,19 @@
 // access express library
 const api = require('express').Router();
-const res = require('express/lib/response');
-// promisifies fs commands (e.g., const readFromFile = util.promisify(fs.readFile));
+// promisify fs commands (e.g., const readFromFile = util.promisify(fs.readFile));
 const fs = require('fs/promises');
 // Helper method for generating unique ids
 const uuid = require('../helpers/uuid');
 
-// * `GET /api/notes` should read the `db.json` file and return all saved notes as JSON.
-// api.get('/api/notes', (req, res) => {
+// GET /api/notes - read the db.json file and return all saved notes as JSON.
+api.get('/', (request, response) => {
+    fs.readFile('./db/db.json')
+    .then(data => response.json(JSON.parse(data)))
+    // if there is an error, tell the user
+    .catch(() => response.status(500).json('Error in saving note.'));
+});
 
-// })
-
-// * `POST /api/notes` should receive a new note to save on the request body, 
-// add it to the `db.json` file, and then return the new note to the client. You'll 
-// need to find a way to give each note a unique id when it's saved (look into npm 
-// packages that could do this for you).
+// POST /api/notes - adds body to db.json
 api.post('/', (request, response) => {
     // destructure req.body
     const { title, text } = request.body;
@@ -25,26 +24,24 @@ api.post('/', (request, response) => {
         const newNote = {
             title,
             text,
+            // gives each note a unique id
             note_id: uuid(),
         };
 
         // obtain existing notes
-        // should i be writing then reading?
         fs.readFile('./db/db.json')
+        // return notes with newNote added
         .then(data => {
             const parsedNotes = JSON.parse(data);
-            // console.log(newNote)
-            // console.log(parsedNotes)
+            // add newNote to db.json file
             parsedNotes.push(newNote);
-            // console.log(parsedNotes)
             return parsedNotes;
         })
-        .then(parsedNotes => {
-            console.log(parsedNotes);
-            fs.writeFile('./db/db.json', JSON.stringify(parsedNotes))
-        })
+        // write updated notes to the db.json file
+        .then(parsedNotes => fs.writeFile('./db/db.json', JSON.stringify(parsedNotes)))
+        // if there is an error, tell the user
+        .catch(() => response.status(500).json('Error in saving note.'));
 
-        .catch(() => response.status(500).json('Error in saving note.'))
         // fs.readFile('./db/db.json', 'utf8')
         // .then ((err, data) => {
         //     if (err) {
@@ -68,4 +65,5 @@ api.post('/', (request, response) => {
     }
 });
 
+// exports api so that it can be accessed at /api/notes path
 module.exports = api;
