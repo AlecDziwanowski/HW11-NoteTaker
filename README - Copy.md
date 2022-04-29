@@ -114,9 +114,6 @@ A web application with a backend built in Express.js that maintains notes writte
 ## Getting Started
 ### Prerequisites
 Install node.js at the url in the "Built With" section above. Then, using the command line, run the commands listed in the "Installation" section below.
-  <!-- ```sh
-  npm install
-  ``` -->
 
 ### Installation
 <!-- 1. Get a free API Key at [https://example.com](https://example.com) -->
@@ -139,7 +136,9 @@ Install node.js at the url in the "Built With" section above. Then, using the co
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-Use the following command to run the program from the root of the code directory. maybe dont need to do this because its on heroku?
+Full-scale functionality can be viewed at the deployed Heroku link at the top of this page.
+
+For back-end functionality, use the following command to run the program from the root of the code directory. Then use an application such as Insomnia, to view the results.
   ```sh
   node server.js
   ```
@@ -153,10 +152,9 @@ Use the following command to run the program from the root of the code directory
 <!-- ROADMAP -->
 ## Roadmap
 ### Future Modifications
-- Allow user to choose team name
-- Validate user inputs
-- Modularize html and prompts
-    <!-- - [ ] Nested Feature -->
+- none planned
+
+<!-- - [ ] Nested Feature -->
 
 See the [open issues](https://github.com/AlecDziwanowski/HW11-NoteTaker/issues) for a full list of proposed features (and known issues).
 
@@ -192,7 +190,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 Alec Dziwanowski - [LinkedIn](https://www.linkedin.com/in/alecdziwanowski/) and [GitHub](https://github.com/AlecDziwanowski) <br>
-Project Link: [https://github.com/AlecDziwanowski/HW11-NoteTaker](https://github.com/AlecDziwanowski/HW11-NoteTaker)
+Project Link: [GitHub Repo](https://github.com/AlecDziwanowski/HW11-NoteTaker) and [Heroku Deployment](https://hw11-notetaker-and.herokuapp.com/notes)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
