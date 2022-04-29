@@ -1,6 +1,6 @@
 // access express library
 const api = require('express').Router();
-// promisify fs commands (e.g., const readFromFile = util.promisify(fs.readFile));
+// promisify fs module commands (e.g., const readFromFile = util.promisify(fs.readFile));
 const fs = require('fs/promises');
 // Helper method for generating unique ids
 const uuid = require('../helpers/uuid');
