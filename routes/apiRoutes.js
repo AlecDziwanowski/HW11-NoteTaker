@@ -38,30 +38,12 @@ api.post('/', (request, response) => {
             return parsedNotes;
         })
         // write updated notes to the db.json file
-        .then(parsedNotes => fs.writeFile('./db/db.json', JSON.stringify(parsedNotes)))
+        .then(parsedNotes => {
+            fs.writeFile('./db/db.json', JSON.stringify(parsedNotes));
+            response.status(201).json('Success!');
+        })
         // if there is an error, tell the user
         .catch(() => response.status(500).json('Error in saving note.'));
-
-        // fs.readFile('./db/db.json', 'utf8')
-        // .then ((err, data) => {
-        //     if (err) {
-        //         console.error(err);
-        //     } else {
-        //         const parsedNotes = JSON.parse(data);
-        //         parsedNotes.push(newNote);
-        //         // null 4? or null 2? in stringify
-        //         return parsedNotes;
-        //     }
-        // })
-        // .then (parsedNotes => {
-        //     return fs.writeFile(
-        //         './db/db.json',
-        //         JSON.stringify(parsedNotes))
-        // })
-        // .then ((writeErr) =>
-        //     res.status(201).json(response)
-        // )
-        // .catch ((err)=> res.status(500).json('Error in saving note'))
     }
 });
 
