@@ -11,6 +11,7 @@ api.get('/', async (request, response) => {
         const savedNotes = await fs.readFile('./db/db.json');
         return response.json(JSON.parse(savedNotes));
     } catch {
+        // if there is an error, tell the user
         return response.status(500).json('Error in saving note.');
     }
 });
@@ -19,7 +20,6 @@ api.get('/', async (request, response) => {
 api.post('/', async (request, response) => {
     // destructure req.body
     const { title, text } = request.body;
-    
     // if all required properties are given
     if (title && text) {
         // establish properties of a note
@@ -29,55 +29,40 @@ api.post('/', async (request, response) => {
             // gives each note a unique id
             id: uuid(),
         };
-
-        // obtain existing notes
+        
         try {
+            // obtain existing notes
             const savedNotes = await fs.readFile('./db/db.json');
             const parsedNotes = JSON.parse(savedNotes);
             // add newNote to db.json file
             parsedNotes.push(newNote);
             const parsedNotesNew = parsedNotes;
+            // update db.json file with new note
             fs.writeFile('./db/db.json', JSON.stringify(parsedNotesNew));
             response.status(201).json('Success!');
         } catch {
+            // if there is an error, tell the user
             return response.status(500).json('Error in saving note.');
         }
     }
 });
 
-// * `DELETE /api/notes/:id` should receive a query parameter that contains the id of a note to delete. To delete a note, you'll 
-// need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
-
-// async await
-
 // Delete /api/notes/id - deletes note
-// api.delete('/:id', (request, response) => {
-//     // destructure req.body
-//     const { title, text, id } = request.body;
-// 
-//     // if all required properties are given
-//     // if (title && text && id) {
-//     //     // establish properties of a note
-//     //     const newNote = {
-//     //         title,
-//     //         text,
-//     //         // gives each note a unique id
-//     //         id: uuid(),
-//     //     };
-
-//         // obtain existing notes
-//         fs.readFile('./db/db.json')
-//         // return notes with newNote added
-//         .then(data => JSON.parse(data))
-//         // write updated notes to the db.json file
-//         .then(parsedNotes => {
-//             fs.writeFile('./db/db.json', JSON.stringify(parsedNotes));
-//             response.status(201).json('Success!');
-//         })
-//         // if there is an error, tell the user
-//         .catch(() => response.status(500).json('Error in saving note.'));
-//     }
-// });
+api.delete('/:id', async (request, response) => {
+    try {
+        // obtain existing notes
+        const savedNotes = await fs.readFile('./db/db.json');
+        const parsedNotes = JSON.parse(savedNotes);
+        // filter out deleted note
+        const parsedNotesAfterDelete = parsedNotes.filter(parsedNote => parsedNote.id !== request.params.id);
+        // write updated notes to the db.json file
+        fs.writeFile('./db/db.json', JSON.stringify(parsedNotesAfterDelete));
+        response.status(201).json('Success!');
+    } catch {
+        // if there is an error, tell the user
+        return response.status(500).json('Error in saving note.');
+    }
+});
 
 // exports api so that it can be accessed at /api/notes path
 module.exports = api;
